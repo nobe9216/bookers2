@@ -1,1 +1,20 @@
-<h1>User info</h1>
+<h1>Editing Book</h1>
+
+<% if @books.errors.any? %>
+  <%= @books.errors.count %>error prohibited this obj from being saved:
+  <% @books.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+<%= form_with model:@books, local:true do |f| %>
+  <label for="title">Title</label>
+  <%= f.text_field :title, autofocus: true, id:"title", placeholder:"タイトル" %>
+  <label for="body">Opinion</label>
+  <%= f.text_area :body, autofocus: true, id:"body", placeholder:"内容" %>
+  <%= f.submit "Update Book" %>
+<% end %>
+
+<%= link_to "Show", book_path(@books.id) %>
+<p>|</p>
+<%= link_to "Back", books_path %>

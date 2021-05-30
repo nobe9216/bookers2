@@ -1,0 +1,30 @@
+<h1>User info</h1>
+  <%= attachment_image_tag user, :profile_image, format: 'jpeg', size: "100x100", fallback: "no_image.jpg" %>
+  <div class="user_name">
+    <p>name</p>
+    <%= user.name %>
+  </div>
+  <div class="user_introduction">
+    <p>introduction</p>
+    <%= user.introduction %>
+  </div>
+
+    <p><%= link_to "profile_edit", edit_user_path(user), class: "pull-right col-xs-12 btn btn-default fas fa-user-cog" %></p>
+
+
+<h1>New book</h1>
+<% if book.errors.any? %>
+  <%= book.errors.count %>error prohibited this obj from being saved:
+  <% book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+<%= form_with model:book, local:true do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_field :body %>
+  <div class="button">
+    <%= f.submit 'Create Book' %>
+  </div>
+<% end %>
